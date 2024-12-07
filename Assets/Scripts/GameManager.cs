@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.IO;
+using System.Reflection;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,7 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject LevelLost;
     public Slingshot Slingshot;
     public GameObject NewHighscore;
-    public int RemainingBirds = 3;
+    public int RemainingBirds = 999;
     public float BirdDestructionTime = 5f;
     public bool IsLevelCleared;
     public bool IsLevelCompleted;
@@ -39,17 +40,22 @@ public class GameManager : MonoBehaviour
     void LoadBirdSettings()
     {
         // Предполагаем, что ConfigLoader уже загружает настройки и доступен через Singleton или глобальный объект
-        var configLoader = FindObjectOfType<ConfigLoader>();
-        Debug.Log(configLoader);
+        //var configLoader = FindObjectOfType<ConfigLoader>();
+        var configLoader = new ConfigLoader();
+        configLoader.Start();
 
         if (configLoader != null && configLoader.settings != null)
         {
-            var birdConfig = configLoader.settings.birdStartCoordinates;
+            var birdConfig = configLoader.settings;
+            Debug.Log(birdConfig.birdStartCoordinates);
+            Debug.Log(birdConfig.birdCount.count);
+         
+
             if (birdConfig != null)
             {
-                transformbirdxcord = birdConfig.xcord;
-                transformbirdycord = birdConfig.ycord;
-                transformbirdzcord = birdConfig.zcord;
+                //transformbirdxcord = birdConfig.xcord;
+                //transformbirdycord = birdConfig.ycord;
+                //transformbirdzcord = birdConfig.zcord;
             }
             else
             {
@@ -227,37 +233,86 @@ public class GameManager : MonoBehaviour
 public class GameSettings
 {
     public BirdStartCoordinatesSettings birdStartCoordinates;
+    public BirdCountSettings birdCount;
 
     public class BirdStartCoordinatesSettings
     {
-        public int xcord;
-        public int ycord;
-        public int zcord;
+        public float xcord;
+        public float ycord;
+        public float zcord;
+    }
+
+    public class BirdCountSettings
+    {
+        public int count;
     }
 }
 
-public class ConfigLoader : MonoBehaviour
+public class ConfigLoader
 {
     public GameSettings settings;
 
-    void Start()
+    public void Start()
     {
         LoadConfig("config.json");
     }
 
-    void LoadConfig(string filePath)
+    void LoadConfig(string fileName)
     {
-        Debug.Log(File.Exists(filePath));
+        var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
 
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-            settings = JsonUtility.FromJson<GameSettings>(json);
-            Debug.Log("Config loaded successfully!");
+            //Debug.Log($"Loaded JSON: {json}");
+
+            try
+            {
+                settings = JsonUtility.FromJson<GameSettings>(json);
+                DebugHelper.DebugObject(settings);
+                Debug.Log("Config loaded successfully!");
+            }
+            catch (System.Exception ex)
+            {
+                Debug.LogError($"Failed to parse JSON: {ex.Message}");
+            }
         }
         else
         {
-            Debug.LogError("Config file not found: " + filePath);
+            Debug.LogError($"Config file not found: {filePath}");
         }
+    }
+}
+
+public static class DebugHelper
+{
+    public static void DebugObject(object obj, string objectName = "Object")
+    {
+        if (obj == null)
+        {
+            Debug.LogWarning($"{objectName} is null.");
+            return;
+        }
+
+        Debug.Log($"--- Debugging {objectName} ---");
+
+        // Получение всех полей объекта
+        var fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+        foreach (var field in fields)
+        {
+            Debug.Log($"{field.Name}: {field.GetValue(obj)}");
+        }
+
+        // Получение всех свойств объекта
+        var properties = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var property in properties)
+        {
+            if (property.CanRead)
+            {
+                Debug.Log($"{property.Name}: {property.GetValue(obj)}");
+            }
+        }
+
+        Debug.Log($"--- End of {objectName} ---");
     }
 }
