@@ -3,6 +3,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -31,8 +32,40 @@ public class GameManager : MonoBehaviour
     public AudioSource LevelFailed;
     public AudioSource LevelCompleted;
 
+    private int transformbirdxcord;
+    private int transformbirdycord;
+    private int transformbirdzcord;
+
+    void LoadBirdSettings()
+    {
+        // Предполагаем, что ConfigLoader уже загружает настройки и доступен через Singleton или глобальный объект
+        var configLoader = FindObjectOfType<ConfigLoader>();
+        Debug.Log(configLoader);
+
+        if (configLoader != null && configLoader.settings != null)
+        {
+            var birdConfig = configLoader.settings.birdStartCoordinates;
+            if (birdConfig != null)
+            {
+                transformbirdxcord = birdConfig.xcord;
+                transformbirdycord = birdConfig.ycord;
+                transformbirdzcord = birdConfig.zcord;
+            }
+            else
+            {
+                Debug.LogError("Bird config not found in settings.");
+            }
+        }
+        else
+        {
+            Debug.LogError("ConfigLoader or settings not initialized.");
+        }
+    }
+
     void Start()
     {
+        LoadBirdSettings();
+
         if (Instance == null)
         {
             Instance = this;
@@ -91,7 +124,7 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < RemainingBirds; i++)
                 {
                     GameObject stillBird = Instantiate(StillBird, new Vector3(0, 0, 0), Quaternion.identity);
-                    stillBird.transform.Find("Bird Body").transform.position = new Vector3(-2.5f * (i + 1), 0, -3.19f);
+                    stillBird.transform.Find("Bird Body").transform.position = new Vector3(transformbirdxcord * (i + 1), transformbirdycord, transformbirdzcord);
                     if (i % 2 == 0)
                     {
                         stillBird.GetComponent<StillBird>().WaitForSeconds = 0.45f;
@@ -188,5 +221,43 @@ public class GameManager : MonoBehaviour
     private int GetHighscore(int level)
     {
         return PlayerPrefs.HasKey($"{level}-highscore") ? PlayerPrefs.GetInt($"{level}-highscore") : 0;
+    }
+}
+
+public class GameSettings
+{
+    public BirdStartCoordinatesSettings birdStartCoordinates;
+
+    public class BirdStartCoordinatesSettings
+    {
+        public int xcord;
+        public int ycord;
+        public int zcord;
+    }
+}
+
+public class ConfigLoader : MonoBehaviour
+{
+    public GameSettings settings;
+
+    void Start()
+    {
+        LoadConfig("config.json");
+    }
+
+    void LoadConfig(string filePath)
+    {
+        Debug.Log(File.Exists(filePath));
+
+        if (File.Exists(filePath))
+        {
+            string json = File.ReadAllText(filePath);
+            settings = JsonUtility.FromJson<GameSettings>(json);
+            Debug.Log("Config loaded successfully!");
+        }
+        else
+        {
+            Debug.LogError("Config file not found: " + filePath);
+        }
     }
 }

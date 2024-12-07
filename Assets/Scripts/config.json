@@ -1,0 +1,9 @@
+{
+	"gameSettings": {
+		"birdStartCoordinates":{
+			"x": "-2.5f",
+			"y": "10",
+			"z": "-3.19f"
+		}
+	}
+}
