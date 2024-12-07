@@ -1,12 +1,12 @@
 {
-    "gameSettings": {
-        "birdStartCoordinates": {
-            "xcord": -2.5,
-            "ycord": 10,
-            "zcord": -3.19
-        },
-        "birdCount": {
-            "count": 999
-        }
-    }
+	"gameSettings": {
+		"birdStartCoordinates":{
+			"xcord": -2.5,
+			"ycord": 10,
+			"zcord": -3.19
+		},
+		"birdCount":{
+			"count": 999,
+		}
+	}
 }

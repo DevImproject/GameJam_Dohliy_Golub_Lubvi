@@ -33,44 +33,47 @@ public class GameManager : MonoBehaviour
     public AudioSource LevelFailed;
     public AudioSource LevelCompleted;
 
-    private int transformbirdxcord;
-    private int transformbirdycord;
-    private int transformbirdzcord;
+    //private int transformbirdxcord;
+    //private int transformbirdycord;
+    //private int transformbirdzcord;
 
-    void LoadBirdSettings()
-    {
-        // Предполагаем, что ConfigLoader уже загружает настройки и доступен через Singleton или глобальный объект
-        //var configLoader = FindObjectOfType<ConfigLoader>();
-        var configLoader = new ConfigLoader();
-        configLoader.Start();
+    //void LoadBirdSettings()
+    //{
+    //    // Предполагаем, что ConfigLoader уже загружает настройки и доступен через Singleton или глобальный объект
+    //    //var configLoader = FindObjectOfType<ConfigLoader>();
+    //    //var configLoader = new ConfigLoader();
+    //    var configLoader = gameObject.AddComponent<ConfigLoader>();
+    //    configLoader.Start();
 
-        if (configLoader != null && configLoader.settings != null)
-        {
-            var birdConfig = configLoader.settings;
-            Debug.Log(birdConfig.birdStartCoordinates);
-            Debug.Log(birdConfig.birdCount.count);
+    //    if (configLoader != null && configLoader.settings != null)
+    //    {
+    //        var bsc = configLoader.settings.birdStartCoordinates;
+
+    //        //DebugHelper.DebugObject(birdConfig.birdStartCoordinates);
+    //        //DebugHelper.DebugObject(birdConfig.birdCount);
+    //        DebugHelper.DebugObject(bsc);
          
 
-            if (birdConfig != null)
-            {
-                //transformbirdxcord = birdConfig.xcord;
-                //transformbirdycord = birdConfig.ycord;
-                //transformbirdzcord = birdConfig.zcord;
-            }
-            else
-            {
-                Debug.LogError("Bird config not found in settings.");
-            }
-        }
-        else
-        {
-            Debug.LogError("ConfigLoader or settings not initialized.");
-        }
-    }
+    //        if (bsc != null)
+    //        {
+    //            //transformbirdxcord = birdConfig.xcord;
+    //            //transformbirdycord = birdConfig.ycord;
+    //            //transformbirdzcord = birdConfig.zcord;
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError("Bird config not found in settings.");
+    //        }
+    //    }
+    //    else
+    //    {
+    //        Debug.LogError("ConfigLoader or settings not initialized.");
+    //    }
+    //}
 
     void Start()
     {
-        LoadBirdSettings();
+        //LoadBirdSettings();
 
         if (Instance == null)
         {
@@ -130,7 +133,7 @@ public class GameManager : MonoBehaviour
                 for (int i = 0; i < RemainingBirds; i++)
                 {
                     GameObject stillBird = Instantiate(StillBird, new Vector3(0, 0, 0), Quaternion.identity);
-                    stillBird.transform.Find("Bird Body").transform.position = new Vector3(transformbirdxcord * (i + 1), transformbirdycord, transformbirdzcord);
+                    stillBird.transform.Find("Bird Body").transform.position = new Vector3(-2.5f * (i + 1), 0, -3.19f);
                     if (i % 2 == 0)
                     {
                         stillBird.GetComponent<StillBird>().WaitForSeconds = 0.45f;
@@ -229,90 +232,92 @@ public class GameManager : MonoBehaviour
         return PlayerPrefs.HasKey($"{level}-highscore") ? PlayerPrefs.GetInt($"{level}-highscore") : 0;
     }
 }
+//[System.Serializable]
+//public class GameSettings
+//{
+//    public BirdStartCoordinatesSettings birdStartCoordinates;
+//    public BirdCountSettings birdCount;
+   
+//    [System.Serializable]
+//    public class BirdStartCoordinatesSettings
+//    {
+//        public float xcord;
+//        public float ycord;
+//        public float zcord;
+//    }
 
-public class GameSettings
-{
-    public BirdStartCoordinatesSettings birdStartCoordinates;
-    public BirdCountSettings birdCount;
+//    [System.Serializable]
+//    public class BirdCountSettings
+//    {
+//        public int count;
+//    }
+//}
 
-    public class BirdStartCoordinatesSettings
-    {
-        public float xcord;
-        public float ycord;
-        public float zcord;
-    }
+//public class ConfigLoader : MonoBehaviour
+//{
+//    public GameSettings settings;
 
-    public class BirdCountSettings
-    {
-        public int count;
-    }
-}
+//    public void Start()
+//    {
+//        LoadConfig("config.json");
+//    }
 
-public class ConfigLoader
-{
-    public GameSettings settings;
+//    void LoadConfig(string fileName)
+//    {
+//        var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
 
-    public void Start()
-    {
-        LoadConfig("config.json");
-    }
+//        if (File.Exists(filePath))
+//        {
+//            string json = File.ReadAllText(filePath);
+//            //Debug.Log($"Loaded JSON: {json}");
 
-    void LoadConfig(string fileName)
-    {
-        var filePath = Path.Combine(Application.streamingAssetsPath, fileName);
+//            try
+//            {
+//                settings = JsonUtility.FromJson<GameSettings>(json);
+//                //DebugHelper.DebugObject(settings);
+//                //Debug.Log("Config loaded successfully!");
+//            }
+//            catch (System.Exception ex)
+//            {
+//                Debug.LogError($"Failed to parse JSON: {ex.Message}");
+//            }
+//        }
+//        else
+//        {
+//            Debug.LogError($"Config file not found: {filePath}");
+//        }
+//    }
+//}
 
-        if (File.Exists(filePath))
-        {
-            string json = File.ReadAllText(filePath);
-            //Debug.Log($"Loaded JSON: {json}");
+//public static class DebugHelper
+//{
+//    public static void DebugObject(object obj, string objectName = "Object")
+//    {
+//        if (obj == null)
+//        {
+//            Debug.LogWarning($"{objectName} is null.");
+//            return;
+//        }
 
-            try
-            {
-                settings = JsonUtility.FromJson<GameSettings>(json);
-                DebugHelper.DebugObject(settings);
-                Debug.Log("Config loaded successfully!");
-            }
-            catch (System.Exception ex)
-            {
-                Debug.LogError($"Failed to parse JSON: {ex.Message}");
-            }
-        }
-        else
-        {
-            Debug.LogError($"Config file not found: {filePath}");
-        }
-    }
-}
+//        Debug.Log($"--- Debugging {objectName} ---");
 
-public static class DebugHelper
-{
-    public static void DebugObject(object obj, string objectName = "Object")
-    {
-        if (obj == null)
-        {
-            Debug.LogWarning($"{objectName} is null.");
-            return;
-        }
+//        // Получение всех полей объекта
+//        var fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+//        foreach (var field in fields)
+//        {
+//            Debug.Log($"{field.Name}: {field.GetValue(obj)}");
+//        }
 
-        Debug.Log($"--- Debugging {objectName} ---");
+//        // Получение всех свойств объекта
+//        var properties = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
+//        foreach (var property in properties)
+//        {
+//            if (property.CanRead)
+//            {
+//                Debug.Log($"{property.Name}: {property.GetValue(obj)}");
+//            }
+//        }
 
-        // Получение всех полей объекта
-        var fields = obj.GetType().GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
-        foreach (var field in fields)
-        {
-            Debug.Log($"{field.Name}: {field.GetValue(obj)}");
-        }
-
-        // Получение всех свойств объекта
-        var properties = obj.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var property in properties)
-        {
-            if (property.CanRead)
-            {
-                Debug.Log($"{property.Name}: {property.GetValue(obj)}");
-            }
-        }
-
-        Debug.Log($"--- End of {objectName} ---");
-    }
-}
+//        Debug.Log($"--- End of {objectName} ---");
+//    }
+//}
