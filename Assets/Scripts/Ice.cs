@@ -8,7 +8,7 @@ public class Ice : MonoBehaviour
     {
         if (collision.relativeVelocity.magnitude > 8)
         {
-            Destroy();
+            //Destroy();
         }
     }
 

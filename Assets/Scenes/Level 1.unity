@@ -122,6 +122,37 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &18499195 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8736242407130811618, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+  m_PrefabInstance: {fileID: 1023183460295111227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &18499197 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1093969318927079703, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+  m_PrefabInstance: {fileID: 1023183460295111227}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18499195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9085046f02f69544eb97fd06b6048fe2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &18499198
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 18499195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cb5cbe9ecdc946deabbdfcfb8510f32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  WoodShatter: {fileID: 0}
+  WoodCollision: {fileID: 0}
+  toggle: {fileID: 18499197}
 --- !u!1 &377280471 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1023183460590495212, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
@@ -351,6 +382,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4496899374117213941, guid: e9f149b59f95c4261b5866b581932585, type: 3}
+      propertyPath: toggle
+      value: 
+      objectReference: {fileID: 18499197}
     - target: {fileID: 7428645006852782802, guid: e9f149b59f95c4261b5866b581932585, type: 3}
       propertyPath: m_Name
       value: Wooden Block (1)
@@ -514,6 +549,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4496899374117213941, guid: e9f149b59f95c4261b5866b581932585, type: 3}
+      propertyPath: toggle
+      value: 
+      objectReference: {fileID: 18499197}
     - target: {fileID: 7428645006852782802, guid: e9f149b59f95c4261b5866b581932585, type: 3}
       propertyPath: m_Name
       value: Wooden Block (2)
@@ -692,6 +731,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4496899374117213941, guid: e9f149b59f95c4261b5866b581932585, type: 3}
+      propertyPath: toggle
+      value: 
+      objectReference: {fileID: 18499197}
     - target: {fileID: 7428645006852782802, guid: e9f149b59f95c4261b5866b581932585, type: 3}
       propertyPath: m_Name
       value: Stena (1)
@@ -777,6 +820,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: -90
       objectReference: {fileID: 0}
+    - target: {fileID: 4496899374117213941, guid: e9f149b59f95c4261b5866b581932585, type: 3}
+      propertyPath: toggle
+      value: 
+      objectReference: {fileID: 18499197}
     - target: {fileID: 7428645006852782802, guid: e9f149b59f95c4261b5866b581932585, type: 3}
       propertyPath: m_Name
       value: Wooden Block (6)
@@ -1015,6 +1062,23 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f6f9e2b8b6b2fdd4ca11c8edc03103b1, type: 3}
+--- !u!1 &1164184731 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1023183461283340172, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+  m_PrefabInstance: {fileID: 1023183460295111227}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1164184736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1164184731}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 80a1683b1fffc1b46a2cd3fd7a93bf69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1369292646
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1269,6 +1333,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4496899374117213941, guid: e9f149b59f95c4261b5866b581932585, type: 3}
+      propertyPath: toggle
+      value: 
+      objectReference: {fileID: 18499197}
     - target: {fileID: 7428645006852782802, guid: e9f149b59f95c4261b5866b581932585, type: 3}
       propertyPath: m_Name
       value: Stena
@@ -1369,6 +1437,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4496899374117213941, guid: e9f149b59f95c4261b5866b581932585, type: 3}
+      propertyPath: toggle
+      value: 
+      objectReference: {fileID: 18499197}
     - target: {fileID: 7428645006852782802, guid: e9f149b59f95c4261b5866b581932585, type: 3}
       propertyPath: m_Name
       value: Wooden Block (7)
@@ -1438,6 +1510,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4496899374117213941, guid: e9f149b59f95c4261b5866b581932585, type: 3}
+      propertyPath: toggle
+      value: 
+      objectReference: {fileID: 18499197}
     - target: {fileID: 7428645006852782802, guid: e9f149b59f95c4261b5866b581932585, type: 3}
       propertyPath: m_Name
       value: Wooden Block (4)
@@ -1455,6 +1531,38 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 430387306474722273, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.98617387
+      objectReference: {fileID: 0}
+    - target: {fileID: 430387306474722273, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: -25
+      objectReference: {fileID: 0}
+    - target: {fileID: 430387306474722273, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 10.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023183459722999170, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023183459953720294, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023183460039541155, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023183460590495212, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1023183461066137407, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1023183461283340160, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -1543,10 +1651,56 @@ PrefabInstance:
       propertyPath: m_Name
       value: Canvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1023183461801264196, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1093969318927079703, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1093969318927079703, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1093969318927079703, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: onValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369964784395841218, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.9825456
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369964784395841218, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0.8831318
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369964784395841218, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369964784395841218, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369964784395841218, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8369964784395841218, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1023183461283340172, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1164184736}
+    - targetCorrespondingSourceObject: {fileID: 8736242407130811618, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 18499198}
   m_SourcePrefab: {fileID: 100100000, guid: 4802936ab0eb74b52977d9753843d4fc, type: 3}
 --- !u!1001 &1502964919418668393
 PrefabInstance:
@@ -1988,6 +2142,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4496899374117213941, guid: e9f149b59f95c4261b5866b581932585, type: 3}
+      propertyPath: toggle
+      value: 
+      objectReference: {fileID: 18499197}
     - target: {fileID: 7428645006852782802, guid: e9f149b59f95c4261b5866b581932585, type: 3}
       propertyPath: m_Name
       value: Wooden Block

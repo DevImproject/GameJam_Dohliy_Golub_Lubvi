@@ -8,7 +8,7 @@ public class Pig : MonoBehaviour
     {
         if (collision.relativeVelocity.magnitude > 5f)
         {
-            Destroy();
+            //Destroy();
         }
     }
 

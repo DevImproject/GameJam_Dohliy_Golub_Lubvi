@@ -1,9 +1,32 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public class Wood : MonoBehaviour
 {
 	public GameObject WoodShatter;
     public AudioSource WoodCollision;
+    public Toggle toggle; // Ссылка на Toggle для управления разрушением
+
+    private bool canDestroy = true; // Флаг, управляющий возможностью разрушения
+
+    void Start()
+    {
+        if (toggle != null)
+        {
+            // Привязка события изменения состояния Toggle
+            toggle.onValueChanged.AddListener(OnToggleValueChanged);
+            canDestroy = toggle.isOn; // Устанавливаем начальное состояние
+        }
+    }
+
+    void OnDestroy()
+    {
+        // Убираем слушатель при уничтожении объекта
+        if (toggle != null)
+        {
+            toggle.onValueChanged.RemoveListener(OnToggleValueChanged);
+        }
+    }
 
     void OnCollisionEnter(Collision collision)
 	{
@@ -11,7 +34,7 @@ public class Wood : MonoBehaviour
         {
             WoodCollision.Play();
         }
-		if (collision.relativeVelocity.magnitude > 13.5f)
+		if (collision.relativeVelocity.magnitude > 13.5f && canDestroy)
 		{
             Destroy();
 		}
@@ -25,4 +48,10 @@ public class Wood : MonoBehaviour
         Destroy(shatter, 2);
 		Destroy(gameObject);
 	}
+
+    private void OnToggleValueChanged(bool isOn)
+    {
+        canDestroy = isOn; // Обновляем состояние разрушения в зависимости от Toggle
+        Debug.Log($"Wood destruction is now {(canDestroy ? "enabled" : "disabled")}.");
+    }
 }

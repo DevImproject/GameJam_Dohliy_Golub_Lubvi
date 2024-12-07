@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
     public GameObject LevelLost;
     public Slingshot Slingshot;
     public GameObject NewHighscore;
-    public int RemainingBirds = 999;
+    public int RemainingBirds = 9;
     public float BirdDestructionTime = 5f;
     public bool IsLevelCleared;
     public bool IsLevelCompleted;
@@ -115,7 +115,7 @@ public class GameManager : MonoBehaviour
     public void SetNewBird()
     {
         ActiveTurn = false;
-        RemainingBirds--;
+        //RemainingBirds--;
         if (RemainingBirds >= 0)
         {
             GameObject bird = Instantiate(SlingshotBird, new Vector3(Slingshot.transform.position.x - 0.08f, Slingshot.transform.position.y + 3.82f, Slingshot.transform.position.z - 0.29f), Quaternion.identity);
@@ -142,7 +142,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        FinishLevel();
+        //FinishLevel();
     }
 
     private void FinishLevel()
