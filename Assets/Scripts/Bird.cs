@@ -70,7 +70,7 @@ public class Bird : MonoBehaviour
             {
                 BirdCollision.Play();
             }
-            GameManager.Instance.AddScore(Random.Range(5, 25) * 10, transform.position, Color.white);
+            //GameManager.Instance.AddScore(Random.Range(5, 25) * 10, transform.position, Color.white);
         }
     }
 

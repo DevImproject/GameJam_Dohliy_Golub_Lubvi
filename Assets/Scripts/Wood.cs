@@ -8,6 +8,7 @@ public class Wood : MonoBehaviour
     public Toggle toggle; // Ссылка на Toggle для управления разрушением
 
     private bool canDestroy = true; // Флаг, управляющий возможностью разрушения
+    private bool isStuck = false; // Флаг, чтобы узнать, застряла ли птица в дереве
 
     void Start()
     {
@@ -34,7 +35,40 @@ public class Wood : MonoBehaviour
         {
             WoodCollision.Play();
         }
-		if (collision.relativeVelocity.magnitude > 13.5f && canDestroy)
+
+        float collisionForce = collision.relativeVelocity.magnitude; // Сила столкновения
+
+        Debug.Log(collisionForce);
+
+        // Проверка застревания птицы в дереве (сила столкновения от 8 до 13.5)
+        if (collisionForce >= 8f && collisionForce <= 16.5f && !isStuck)
+        {
+            isStuck = true;
+            Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = true; // Останавливаем физику, чтобы птица застряла
+            }
+
+            // Создаем эффект разрушения дерева и воспроизводим звуки
+            GameObject shatter = Instantiate(WoodShatter, transform.position, Quaternion.identity);
+            Destroy(shatter, 10f); // Уничтожаем эффект через 2 секунды
+            WoodCollision.Play(); // Проигрываем звук столкновения дерева
+        }
+        // Если сила столкновения меньше 8, птица отскакивает
+        else if (collisionForce < 8f)
+        {
+            // Птица отскакивает
+            Rigidbody rb = collision.collider.GetComponent<Rigidbody>();
+            if (rb != null)
+            {
+                rb.isKinematic = false; // Включаем физику обратно
+                rb.AddForce(collision.contacts[0].normal * 5f, ForceMode.Impulse); // Отскок от дерева
+            }
+        }
+
+        // Условие для разрушения дерева
+        if (collisionForce > 16.5f && canDestroy)
 		{
             Destroy();
 		}
