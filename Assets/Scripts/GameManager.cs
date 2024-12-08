@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (!IsLevelCleared && GameObject.FindGameObjectsWithTag("Pig").Length == 0)
+        /*if (!IsLevelCleared && GameObject.FindGameObjectsWithTag("Pig").Length == 0)
         {
             IsLevelCleared = true;
             LevelCleared.Play();
@@ -94,7 +94,7 @@ public class GameManager : MonoBehaviour
             {
                 FinishLevel();
             }
-        }
+        }*/
     }
 
     public void AddScore(int amount, Vector3 position, Color textColor)
