@@ -35,6 +35,7 @@ public class GameManager : MonoBehaviour
 
     public Text messageText; // UI текст для отображения сообщения
     public Image messageBG; // UI текст для отображения сообщения
+    public Button messageBGButton; // UI текст для отображения сообщения
     public string startMessage = "Любви покорны все, особенно мёртвые голуби. Этот прекрасный мёртвый птиц готов преодолеть любые препятствия, чтобы вонзиться своим USB-клювом в порт назначения, так поможем же ему!"; // Текст сообщения
     public float displayDuration = 8f; // Длительность отображения текста в секундах
 
@@ -85,6 +86,8 @@ public class GameManager : MonoBehaviour
 
         if (messageText != null)
         {
+            messageBGButton.onClick.AddListener(HideImageOnClick);
+
             // Устанавливаем текст сообщения
             messageText.text = startMessage;
 
@@ -120,6 +123,15 @@ public class GameManager : MonoBehaviour
         if (inactivityTimer >= maxInactivityTime)
         {
             ReloadScene();
+        }
+    }
+
+    // Метод для скрытия Image при клике
+    private void HideImageOnClick()
+    {
+        if (messageBG != null)
+        {
+            messageBG.gameObject.SetActive(false);
         }
     }
 

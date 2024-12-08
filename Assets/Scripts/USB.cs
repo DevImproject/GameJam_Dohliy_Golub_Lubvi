@@ -5,8 +5,20 @@ public class USB : MonoBehaviour
 {
     public Text messageText; // Ссылка на UI текст, куда будет выводиться сообщение
     public Image messageBG; // Ссылка на UI текст, куда будет выводиться сообщение
+    public Button messageBGButton; // UI текст для отображения сообщения
+
     private bool isStuck = false; // Флаг, чтобы отслеживать, застряла ли птица
     public float displayDuration = 3f; // Длительность отображения текста в секундах
+
+    void Start()
+    {
+        //LoadBirdSettings();
+
+        if (messageText != null)
+        {
+            messageBGButton.onClick.AddListener(HideImageOnClick);
+        }
+    }
 
     void OnCollisionEnter(Collision collision)
     {
@@ -36,6 +48,15 @@ public class USB : MonoBehaviour
         {
             StartCoroutine(HideMessageAfterDelay());
             //ShowMessage(""); // Убираем сообщение, если птица корректно вставляется
+        }
+    }
+
+    // Метод для скрытия Image при клике
+    private void HideImageOnClick()
+    {
+        if (messageBG != null)
+        {
+            messageBG.gameObject.SetActive(false);
         }
     }
 
