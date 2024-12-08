@@ -66,10 +66,10 @@ public class Bird : MonoBehaviour
         {
             GameObject feathers = Instantiate(Feathers, transform.position, Quaternion.identity);
             Destroy(feathers, 2);
-            /*if (!BirdCollision.isPlaying)
+            if (!BirdCollision.isPlaying)
             {
                 BirdCollision.Play();
-            }*/
+            }
             //GameManager.Instance.AddScore(Random.Range(5, 25) * 10, transform.position, Color.white);
         }
     }

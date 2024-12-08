@@ -33,6 +33,11 @@ public class GameManager : MonoBehaviour
     public AudioSource LevelFailed;
     public AudioSource LevelCompleted;
 
+    public Text messageText; // UI текст для отображения сообщения
+    public Image messageBG; // UI текст для отображения сообщения
+    public string startMessage = "Любви покорны все, особенно мёртвые голуби. Этот прекрасный мёртвый птиц готов преодолеть любые препятствия, чтобы вонзиться своим USB-клювом в порт назначения, так поможем же ему!"; // Текст сообщения
+    public float displayDuration = 8f; // Длительность отображения текста в секундах
+
     //private int transformbirdxcord;
     //private int transformbirdycord;
     //private int transformbirdzcord;
@@ -52,7 +57,7 @@ public class GameManager : MonoBehaviour
     //        //DebugHelper.DebugObject(birdConfig.birdStartCoordinates);
     //        //DebugHelper.DebugObject(birdConfig.birdCount);
     //        DebugHelper.DebugObject(bsc);
-         
+
 
     //        if (bsc != null)
     //        {
@@ -75,13 +80,17 @@ public class GameManager : MonoBehaviour
     {
         //LoadBirdSettings();
 
-        if (Instance == null)
+        if (messageText != null)
         {
-            Instance = this;
+            // Устанавливаем текст сообщения
+            messageText.text = startMessage;
+
+            // Запускаем корутину для скрытия текста через 5 секунд
+            // Запускаем корутину для скрытия текста через 5 секунд
+            StartCoroutine(HideMessageAfterDelay());
         }
-        int level = SceneManager.GetActiveScene().buildIndex;
-        HighscoreText.text = GetHighscore(level).ToString();
-        SetNewBird();
+
+
     }
 
     void Update()
@@ -230,6 +239,26 @@ public class GameManager : MonoBehaviour
     private int GetHighscore(int level)
     {
         return PlayerPrefs.HasKey($"{level}-highscore") ? PlayerPrefs.GetInt($"{level}-highscore") : 0;
+    }
+
+    private System.Collections.IEnumerator HideMessageAfterDelay()
+    {
+        yield return new WaitForSeconds(displayDuration); // Ждем указанное количество секунд
+
+        if (messageText != null)
+        {
+            messageText.gameObject.SetActive(false); // Скрываем текст
+            messageBG.gameObject.SetActive(false); // Скрываем текст
+        }
+
+        // Игра продолжается, можно добавить дополнительную логику здесь
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        int level = SceneManager.GetActiveScene().buildIndex;
+        HighscoreText.text = GetHighscore(level).ToString();
+        SetNewBird();
     }
 }
 //[System.Serializable]

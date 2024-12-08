@@ -4,7 +4,9 @@ using UnityEngine.UI; // Для вывода сообщения в UI
 public class USB : MonoBehaviour
 {
     public Text messageText; // Ссылка на UI текст, куда будет выводиться сообщение
+    public Image messageBG; // Ссылка на UI текст, куда будет выводиться сообщение
     private bool isStuck = false; // Флаг, чтобы отслеживать, застряла ли птица
+    public float displayDuration = 3f; // Длительность отображения текста в секундах
 
     void OnCollisionEnter(Collision collision)
     {
@@ -18,13 +20,17 @@ public class USB : MonoBehaviour
             if (angle > 45f & !isStuck)
             {
                 isStuck = true; // Устанавливаем флаг застревания
-                ShowMessage("Не той стороной переверни"); // Показываем сообщение о неправильной ориентации
+                messageBG.gameObject.SetActive(true); // Скрываем текст
+                ShowMessage("Как всегда, USB-штекер повёрнут не той стороной... нужно перевернуть его и воткнуть снова!"); // Показываем сообщение о неправильной ориентации
                 StopBird(collision); // Останавливаем движение птицы
+          
             }
             else
             {
                 ShowMessage(""); // Убираем сообщение, если птица корректно вставляется
+                messageBG.gameObject.SetActive(false); // Скрываем текст
                 isStuck = false; // Сбрасываем флаг застревания
+                StartCoroutine(HideMessageAfterDelay());
             }
         }
         else
@@ -51,5 +57,12 @@ public class USB : MonoBehaviour
         {
             messageText.text = message; // Отображаем переданное сообщение
         }
+    }
+
+    private System.Collections.IEnumerator HideMessageAfterDelay()
+    {
+        yield return new WaitForSeconds(displayDuration); // Ждем указанное количество секунд
+        ShowMessage(""); // Убираем сообщение, если птица корректно вставляется
+        messageBG.gameObject.SetActive(false); // Скрываем текст
     }
 }

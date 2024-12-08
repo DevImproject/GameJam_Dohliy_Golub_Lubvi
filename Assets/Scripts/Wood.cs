@@ -33,12 +33,15 @@ public class Wood : MonoBehaviour
 	{
         if (collision.collider.CompareTag("Bird"))
         {
-            WoodCollision.Play();
+            if (WoodCollision != null)
+            {
+                WoodCollision.Play();
+        }
         }
 
         float collisionForce = collision.relativeVelocity.magnitude; // Сила столкновения
 
-        Debug.Log(collisionForce);
+        //Debug.Log(collisionForce);
 
         // Проверка застревания птицы в дереве (сила столкновения от 8 до 13.5)
         if (collisionForce >= 8f && collisionForce <= 16.5f && !isStuck)
@@ -51,9 +54,14 @@ public class Wood : MonoBehaviour
             }
 
             // Создаем эффект разрушения дерева и воспроизводим звуки
+            if (WoodShatter) { 
             GameObject shatter = Instantiate(WoodShatter, transform.position, Quaternion.identity);
             Destroy(shatter, 10f); // Уничтожаем эффект через 2 секунды
-            WoodCollision.Play(); // Проигрываем звук столкновения дерева
+            }
+            if (WoodCollision != null)
+            {
+                WoodCollision.Play(); // Проигрываем звук столкновения дерева
+        }
         }
         // Если сила столкновения меньше 8, птица отскакивает
         else if (collisionForce < 8f)
@@ -77,10 +85,12 @@ public class Wood : MonoBehaviour
 	private void Destroy()
 	{
         GameManager.Instance.WoodDestruction.Play();
+        if (WoodShatter) { 
         GameObject shatter = Instantiate(WoodShatter, transform.position, Quaternion.identity);
-        GameManager.Instance.AddScore(500, transform.position, Color.white);
+        //GameManager.Instance.AddScore(500, transform.position, Color.white);
         Destroy(shatter, 2);
-		Destroy(gameObject);
+        }
+        Destroy(gameObject);
 	}
 
     private void OnToggleValueChanged(bool isOn)
