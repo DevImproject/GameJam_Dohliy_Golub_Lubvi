@@ -21,21 +21,21 @@ public class USB : MonoBehaviour
             {
                 isStuck = true; // Устанавливаем флаг застревания
                 messageBG.gameObject.SetActive(true); // Скрываем текст
-                ShowMessage("Как всегда, USB-штекер повёрнут не той стороной... нужно перевернуть его и воткнуть снова!"); // Показываем сообщение о неправильной ориентации
+                //ShowMessage("Как всегда, USB-штекер повёрнут не той стороной... нужно перевернуть его и воткнуть снова!"); // Показываем сообщение о неправильной ориентации
                 StopBird(collision); // Останавливаем движение птицы
           
             }
             else
             {
-                ShowMessage(""); // Убираем сообщение, если птица корректно вставляется
-                messageBG.gameObject.SetActive(false); // Скрываем текст
+                //ShowMessage(""); // Убираем сообщение, если птица корректно вставляется
                 isStuck = false; // Сбрасываем флаг застревания
                 StartCoroutine(HideMessageAfterDelay());
             }
         }
         else
         {
-            ShowMessage(""); // Убираем сообщение, если птица корректно вставляется
+            StartCoroutine(HideMessageAfterDelay());
+            //ShowMessage(""); // Убираем сообщение, если птица корректно вставляется
         }
     }
 
@@ -62,7 +62,7 @@ public class USB : MonoBehaviour
     private System.Collections.IEnumerator HideMessageAfterDelay()
     {
         yield return new WaitForSeconds(displayDuration); // Ждем указанное количество секунд
-        ShowMessage(""); // Убираем сообщение, если птица корректно вставляется
+        //ShowMessage(""); // Убираем сообщение, если птица корректно вставляется
         messageBG.gameObject.SetActive(false); // Скрываем текст
     }
 }
