@@ -38,6 +38,9 @@ public class GameManager : MonoBehaviour
     public string startMessage = "Любви покорны все, особенно мёртвые голуби. Этот прекрасный мёртвый птиц готов преодолеть любые препятствия, чтобы вонзиться своим USB-клювом в порт назначения, так поможем же ему!"; // Текст сообщения
     public float displayDuration = 8f; // Длительность отображения текста в секундах
 
+    private float inactivityTimer = 0f; // Таймер для отслеживания бездействия
+    private const float maxInactivityTime = 300f; // 5 минут (300 секунд)
+
     //private int transformbirdxcord;
     //private int transformbirdycord;
     //private int transformbirdzcord;
@@ -104,6 +107,29 @@ public class GameManager : MonoBehaviour
                 FinishLevel();
             }
         }*/
+        // Увеличиваем таймер каждую секунду
+        inactivityTimer += Time.deltaTime;
+
+        // Проверяем активность игрока
+        if (Input.anyKeyDown || Input.GetAxis("Mouse X") != 0 || Input.GetAxis("Mouse Y") != 0)
+        {
+            inactivityTimer = 0f; // Сбрасываем таймер при активности
+        }
+
+        // Если время бездействия превышает 5 минут, перезапускаем сцену
+        if (inactivityTimer >= maxInactivityTime)
+        {
+            ReloadScene();
+        }
+    }
+
+    private void ReloadScene()
+    {
+        // Получаем текущую сцену
+        Scene currentScene = SceneManager.GetActiveScene();
+
+        // Перезапускаем сцену
+        SceneManager.LoadScene(currentScene.name);
     }
 
     public void AddScore(int amount, Vector3 position, Color textColor)
