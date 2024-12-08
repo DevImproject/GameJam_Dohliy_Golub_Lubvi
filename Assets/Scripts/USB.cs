@@ -23,7 +23,7 @@ public class USB : MonoBehaviour
                 messageBG.gameObject.SetActive(true); // Скрываем текст
                 //ShowMessage("Как всегда, USB-штекер повёрнут не той стороной... нужно перевернуть его и воткнуть снова!"); // Показываем сообщение о неправильной ориентации
                 StopBird(collision); // Останавливаем движение птицы
-          
+                StartCoroutine(HideMessageAfterDelay());
             }
             else
             {
