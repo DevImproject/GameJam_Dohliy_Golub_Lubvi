@@ -86,14 +86,17 @@ public class GameManager : MonoBehaviour
 
         if (messageText != null)
         {
+
             messageBGButton.onClick.AddListener(HideImageOnClick);
 
+            if (!messageBGButton) { 
             // Устанавливаем текст сообщения
             messageText.text = startMessage;
 
             // Запускаем корутину для скрытия текста через 5 секунд
             // Запускаем корутину для скрытия текста через 5 секунд
             StartCoroutine(HideMessageAfterDelay());
+            }
         }
 
 
@@ -132,6 +135,14 @@ public class GameManager : MonoBehaviour
         if (messageBG != null)
         {
             messageBG.gameObject.SetActive(false);
+            // Игра продолжается, можно добавить дополнительную логику здесь
+            if (Instance == null)
+            {
+                Instance = this;
+            }
+            int level = SceneManager.GetActiveScene().buildIndex;
+            HighscoreText.text = GetHighscore(level).ToString();
+            SetNewBird();
         }
     }
 
